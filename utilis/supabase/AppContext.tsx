@@ -1,0 +1,65 @@
+'use client'
+
+import { useEffect } from "react"
+import { createContext, useState } from "react"
+import { Session } from "@supabase/supabase-js"
+import { createClient } from "./client"
+import React from "react"
+
+interface AppContextParams {
+    session: Session | null
+    setSession: (session: Session | null) => void
+}
+
+const AppContext = createContext<AppContextParams | null>(null)
+
+export function AppContextProvider({ children }: { children: React.ReactNode }) {
+    const [session, setSession] = useState<Session | null>(null)
+
+    useEffect(() => {
+        const supabase = createClient()
+
+        const fetchSession = async () => {
+            const { data: { session }, error } = await supabase.auth.getSession()
+            if (error) {
+                console.log("No active session found")
+            }
+            console.log("Active session found", session)
+            setSession(session)
+        }
+
+
+        fetchSession()
+        supabase.auth.onAuthStateChange((event, session) => {
+            console.log("Auth state changed", event, session)
+
+            if (event === "SIGNED_IN") {
+                console.log("Auth sate changed")
+                fetchSession()
+            } else if (event === "SIGNED_OUT") {
+                console.log("User signed out")
+                setSession(null)
+            }
+        })
+
+    })
+
+
+    const value = {
+        session,
+        setSession
+    }
+    return (
+        <AppContext.Provider value={value}>
+            {children}
+        </AppContext.Provider>
+    )
+}
+
+export const useAppContext = (): AppContextParams => {
+    const context = React.useContext(AppContext)
+    if (!context) {
+        throw new Error("useAppContext must be used within an AppContextProvider")
+    }
+    return context
+}
