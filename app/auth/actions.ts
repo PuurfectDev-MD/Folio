@@ -12,16 +12,16 @@ export async function login(formData: FormData): Promise<{ error: string } | voi
         password: formData.get('password') as string,
     }
 
-    const { error } = await supabase.auth.signInWithPassword(data)
+    const { data: { user }, error } = await supabase.auth.signInWithPassword(data)
 
     if (error) {
         throw new Error(error.message)
     }
     revalidatePath('/', 'layout')
-    redirect('/')
+    redirect(`/${user?.id}`)
 }
 
-export async function signUp(formData: FormData) {
+export async function signUp(formData: FormData): Promise<{ error: string } | void> {
     const supabase = await createClient()
     const { data, error } = await supabase.auth.signUp({
         email: formData.get('email') as string,
@@ -38,7 +38,7 @@ export async function signUp(formData: FormData) {
     }
 
     revalidatePath('/', 'layout')
-    redirect('/')
+    redirect(`/${data.user?.id}`)
 
 }
 

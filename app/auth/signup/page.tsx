@@ -1,7 +1,9 @@
 
 import { SignupForm } from "@/app/_components/auth/SignUpForm";
+import { redirectIfAuthenticated } from "@/utilis/redirectIfAuthenticated";
 
-export default function SignupPage() {
+export default async function SignupPage() {
+    await redirectIfAuthenticated()
     return <SignupForm />;
 }
 

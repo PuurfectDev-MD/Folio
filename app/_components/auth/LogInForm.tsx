@@ -16,16 +16,13 @@ export function LoginForm() {
             setError("All fields are requried")
             return
         }
-        try {
-            const result = await login(formData);
-            if (result?.error) {
-                setError(result.error);
-                return
-            }
-        } catch (err) {
-            setError('Something went wrong');
+
+        const result = await login(formData);
+        if (result?.error) {
+            setError(result.error);
             return
         }
+
     }
 
     return (
