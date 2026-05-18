@@ -1,11 +1,7 @@
-"use client"
+import { redirectIfAuthenticated } from "@/utilis/redirectIfAuthenticated"
+import Home from "./_components/index/Home"
 
-export default function Home() {
-  return (
-    <div>
-      <h1>Hello stranger</h1>
-    </div>
-  )
-
-
+export default async function Page() {
+  await redirectIfAuthenticated()
+  return <Home />
 }

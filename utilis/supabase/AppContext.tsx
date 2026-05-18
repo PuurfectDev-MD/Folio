@@ -7,7 +7,9 @@ import { createClient } from "./client"
 import React from "react"
 
 interface AppContextParams {
-    session: Session | null
+    session: Session | null,
+    loading: boolean,
+    setLoading: (loading: boolean) => void,
     setSession: (session: Session | null) => void
 }
 
@@ -15,6 +17,8 @@ const AppContext = createContext<AppContextParams | null>(null)
 
 export function AppContextProvider({ children }: { children: React.ReactNode }) {
     const [session, setSession] = useState<Session | null>(null)
+    const [loading, setLoading] = useState(true)
+
 
     useEffect(() => {
         const supabase = createClient()
@@ -24,13 +28,14 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
             if (error) {
                 console.log("No active session found")
             }
+            setLoading(false)
             console.log("Active session found", session)
             setSession(session)
         }
 
 
         fetchSession()
-        supabase.auth.onAuthStateChange((event, session) => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
             console.log("Auth state changed", event, session)
 
             if (event === "SIGNED_IN") {
@@ -41,13 +46,16 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
                 setSession(null)
             }
         })
+        return () => subscription.unsubscribe()
 
-    })
+    }, [])
 
 
     const value = {
         session,
-        setSession
+        setSession,
+        loading,
+        setLoading
     }
     return (
         <AppContext.Provider value={value}>

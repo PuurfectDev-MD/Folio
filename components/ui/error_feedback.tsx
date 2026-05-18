@@ -4,7 +4,6 @@ export function ErrorFeedback({ errorMsg, reset }: { errorMsg: string, reset: ()
             className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
             onClick={reset}
         >
-            {/* Modal */}
             <div
                 className="bg-white rounded-xl p-6 shadow-lg max-w-sm w-full mx-4"
                 onClick={e => e.stopPropagation()}
