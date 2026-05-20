@@ -3,6 +3,7 @@
 import { signUp } from '@/app/auth/actions';
 import { useState } from 'react';
 import { ErrorFeedback } from "@/components/ui/error_feedback";
+import Link from 'next/dist/client/link';
 export function SignupForm() {
     const [error, setError] = useState<string | null>(null);
 
@@ -38,27 +39,33 @@ export function SignupForm() {
     return (
         <>
             {error && <ErrorFeedback errorMsg={error} reset={() => setError(null)} />}
-            <div>
-                <h1>Form</h1>
+
+            <div className="flex flex-col gap-y-4 justify-center items-center h-[90vh]">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-y-6">
+                    <label htmlFor="username">Username
+                        <input className="pl-2 border-b-2 border-white" type="text" id="username" name="username" />
+                    </label>
+
+                    <label htmlFor="email">Email
+                        <input className="pl-2 border-b-2 border-white" type="email" id="email" name="email" />
+                    </label>
+
+                    <label htmlFor="password">Password
+                        <input className="pl-2 border-b-2 border-white" type="password" id="password" name="password" />
+                    </label>
+
+                    <label htmlFor="confirmPassword">Confirm Password
+                        <input className="pl-2 border-b-2 border-white" type="password" id="confirmPassword" name="confirmPassword" />
+                    </label>
+
+                    <button type="submit" className="cursor-pointer p-2 bg-blue-500 text-white rounded" >Sign Up</button>
+                </form>
+                <div className="flex gap-x-4 justify-center items-center">
+                    <p>Already have an account?</p>
+                    <Link href="/auth/login">Log in</Link>
+                </div>
+
             </div>
-
-            <form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
-                <label htmlFor="username">Username
-                    <input type="text" id="username" name="username" />
-                </label>
-                <label htmlFor="email">Email
-                    <input type="email" id="email" name="email" />
-                </label>
-
-                <label htmlFor="password">Password
-                    <input type="password" id="password" name="password" />
-                </label>
-                <label htmlFor="confirmPassword">Confirm Password
-                    <input type="password" id="confirmPassword" name="confirmPassword" />
-                </label>
-
-                <button type="submit" className="cursor-pointer" >Submit</button>
-            </form>
 
         </>
     )

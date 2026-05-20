@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { createClient } from "@/utilis/supabase/server";
 import { AppContextProvider } from "@/utilis/supabase/AppContext";
-
+import { NavBar } from "./_components/navbar/NavBar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,7 +36,9 @@ export default async function RootLayout({
     >
 
       <body className="min-h-full flex flex-col">
+
         <AppContextProvider>
+          <NavBar />
           {children}
         </AppContextProvider>
       </body>
