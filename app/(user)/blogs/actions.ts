@@ -1,6 +1,6 @@
 import { createClient } from "@/utilis/supabase/server"
 
-export interface BlogFetch {  // 👈 add export
+export interface BlogFetch {
     id: string
     title: string
     content: string
@@ -17,7 +17,7 @@ export async function viewBlogById(id: string): Promise<{ error: string } | Blog
         console.log("Error fetching blog", error)
         return { error: error.message }
     }
-    const user = (data.users) as { username: string }[] | null
+    const user = (data.users as unknown) as { username: string } | null
 
     const blog: BlogFetch = {
         id: data.id,
@@ -25,7 +25,7 @@ export async function viewBlogById(id: string): Promise<{ error: string } | Blog
         content: data.content,
         created_at: data.created_at,
         author_id: data.author_id,
-        username: user?.[0]?.username || null
+        username: user?.username || null
     }
     return blog
 }

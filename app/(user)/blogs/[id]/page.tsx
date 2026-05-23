@@ -1,6 +1,9 @@
 import { viewBlogById } from "../actions"
 import { notFound } from "next/navigation"
 import ViewBlog from "@/app/_components/blog/ViewBlog"
+import { LoadingScreen } from "@/components/ui/loadingScreen"
+import { Suspense } from "react"
+
 
 export default async function BlogPage({ params }: { params: Promise<{ id: string }> }) {
 
@@ -9,6 +12,10 @@ export default async function BlogPage({ params }: { params: Promise<{ id: strin
 
     if ('error' in result) notFound()
 
-    return <ViewBlog blog={result} />
+    return (
+        <Suspense fallback={<LoadingScreen></LoadingScreen>}>
+            <ViewBlog blog={result} />
+        </Suspense>
+    )
 }
 
