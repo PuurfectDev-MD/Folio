@@ -15,7 +15,7 @@ export async function Quote() {
     console.log(data[0].quote)
 
     return (
-        <div className="w-[100vh] flex shrink py-4 px-6">
+        <div className="w-full flex shrink py-4 px-6 text-center bg-zinc-800 border border-zinc-800 rounded-lg">
             <Suspense fallback={<p>Loading....</p>}>
                 <h1 className="text-6xl">{data[0].quote}</h1>
             </Suspense>

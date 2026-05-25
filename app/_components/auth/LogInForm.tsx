@@ -4,9 +4,11 @@ import { login } from "@/app/auth/actions"
 import { useState } from "react"
 import { ErrorFeedback } from "@/components/ui/error_feedback"
 import Link from "next/link"
+import { LoadingScreen } from "@/components/ui/loadingScreen"
 
 export function LoginForm() {
     const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState<boolean>(false)
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
@@ -17,8 +19,9 @@ export function LoginForm() {
             setError("All fields are requried")
             return
         }
-
+        setLoading(true)
         const result = await login(formData);
+        setLoading(false)
         if (result?.error) {
             setError(result.error);
             return
@@ -29,7 +32,7 @@ export function LoginForm() {
     return (
         <>
             {error && <ErrorFeedback errorMsg={error} reset={() => setError(null)} />}
-
+            {loading && <LoadingScreen></LoadingScreen>}
             <div className="flex flex-col gap-y-4 justify-center items-center h-[90vh]">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-y-6">
                     <label htmlFor="email">Email

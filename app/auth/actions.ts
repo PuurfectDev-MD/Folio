@@ -4,6 +4,9 @@ import { createClient } from '@/utilis/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+
+const redirectToUrl = 'http://localhost:3000/auth/callback'
+
 export async function login(formData: FormData): Promise<{ error: string } | void> {
     const supabase = await createClient()
 
@@ -27,6 +30,7 @@ export async function signUp(formData: FormData): Promise<{ error: string } | vo
         email: formData.get('email') as string,
         password: formData.get('password') as string,
         options: {
+            emailRedirectTo: redirectToUrl,
             data: {
                 username: formData.get('username') as string,
             },
@@ -37,8 +41,6 @@ export async function signUp(formData: FormData): Promise<{ error: string } | vo
         return { error: error.message }
     }
 
-    revalidatePath('/', 'layout')
-    redirect(`/${data.user?.id}`)
 
 }
 

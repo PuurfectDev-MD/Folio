@@ -19,9 +19,11 @@ export function NavBar() {
                     </div>
                 ) : null}
                 <div className="flex pr-4">
-                    {session ? (
-                        <button onClick={logout}>Logout</button>
+                    {session?.user ? (
+                        <button className="cursor-pointer" onClick={logout}>Logout</button>
+
                     ) : (
+
                         <Link href="/auth/login">Login</Link>
                     )}
                 </div>
