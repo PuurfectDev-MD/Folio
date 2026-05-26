@@ -1,4 +1,3 @@
-import { DashboardClient } from "@/app/_components/dashboard/Client"
 import { Quote } from "@/app/_components/dashboard/Quote"
 import { Stats } from "@/app/_components/dashboard/Stats"
 
@@ -10,7 +9,7 @@ export default function Home() {
                 <Quote></Quote>
             </div>
 
-            <DashboardClient></DashboardClient>
+
             <Stats></Stats>
 
         </>

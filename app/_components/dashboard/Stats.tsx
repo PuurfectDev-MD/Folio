@@ -1,5 +1,7 @@
+"use server"
 import { createClient } from "@/utilis/supabase/server";
 import { redirect } from "next/navigation";
+import { CreateButton } from "./CreateButton";
 
 export async function Stats() {
     const supabase = await createClient()
@@ -12,19 +14,30 @@ export async function Stats() {
 
     return (
         <>
-            <div className="grid grid-cols-3 gap-x-5 p-4">
-                <div className="card">
-                    <h1>{userStats ?? 0}</h1>
-                    <h4>Notes written</h4>
+            <div className="p-4">
+                <h3 className="text-4xl">Hello there</h3>
+                <h1 className="text-5xl">{user?.user_metadata.username || "no username"} !</h1>
+            </div>
+
+
+
+            <div className="flex w-full justify-between max-h-200 p-4">
+                <div className="card p-4 w-100 h-64 flex flex-col justify-between">
+                    <h1 className="text-8xl py-3">{userStats ? userStats : "0"}</h1>
+
+                    <div className="py-3">
+                        <h4 className="text-3xl ">Notes written</h4>
+                        <p className="italic">**Thats not enough..</p>
+                    </div>
+
                 </div>
-                <div className="card">
-                    <h1>{userStats ? userStats : "0"}</h1>
-                    <h4>Notes written</h4>
+
+                <div className="flex justify-center items-center">
+                    <CreateButton></CreateButton>
                 </div>
-                <div className="card">
-                    <h1>{userStats ? userStats : "0"}</h1>
-                    <h4>Notes written</h4>
-                </div>
+
+
+
             </div>
         </>
     )

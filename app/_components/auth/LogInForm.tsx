@@ -20,11 +20,18 @@ export function LoginForm() {
             return
         }
         setLoading(true)
-        const result = await login(formData);
-        setLoading(false)
-        if (result?.error) {
-            setError(result.error);
-            return
+
+
+        try {
+            const result = await login(formData);
+            if (result?.error) {
+                console.log(result?.error)
+                setError(result.error);
+                setLoading(false)
+            }
+        } catch (error) {
+            setError(error instanceof Error ? error.message : 'An error occurred. Try again!');
+            setLoading(false)
         }
 
     }

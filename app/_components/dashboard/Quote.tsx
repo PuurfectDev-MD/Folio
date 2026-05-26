@@ -2,7 +2,7 @@
 import { Suspense } from "react"
 
 export async function Quote() {
-    const response = await fetch("https://quotesapi.prayushadhikari.com.np/api/quotes?categories=wisdom,motivation&limit=1")
+    const response = await fetch("https://quotesapi.prayushadhikari.com.np/api/quotes?categories=wisdom,motivation&limit=1&min_len=20&max_len=100")
     if (!response.ok) {
         return <p className="text-sm text-gray-400 text-center">Failed to fetch a fresh quote.</p>
     }

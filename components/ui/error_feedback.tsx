@@ -12,7 +12,7 @@ export function ErrorFeedback({ errorMsg, reset }: { errorMsg: string, reset: ()
                 <p className="text-gray-700 mb-4">{errorMsg}</p>
                 <button
                     onClick={reset}
-                    className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 cursor-pointer"
+                    className="w-full bg-blue-500  text-white py-2 rounded-lg hover:bg-blue-600 cursor-pointer"
                 >
                     Close
                 </button>
