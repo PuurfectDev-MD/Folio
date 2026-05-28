@@ -1,5 +1,5 @@
+"use server"
 import { createClient } from "@/utilis/supabase/server"
-
 
 interface BlogCardInfoFetch {
     id: string,
@@ -38,4 +38,21 @@ export async function viewAllBlogs(): Promise<{ error: string } | { blogCards: B
     }))
 
     return { blogCards }
+}
+
+
+export async function deleteBlogById(id: string) {
+
+    const supabase = await createClient()
+    const { data: { user }, error: userFetchError } = await supabase.auth.getUser()
+    if (userFetchError) {
+        return { error: userFetchError.message };
+    }
+    if (!user?.id) {
+        return { error: "User not authenticated" };
+    }
+    const author_id = user.id
+
+    const result = await supabase.from("blogs").delete().eq("author_id", author_id).eq("id", id)
+
 }

@@ -1,6 +1,6 @@
-import { ViewAllBlogs } from "@/app/_components/blog/ViewAllBlogs";
 import { Suspense } from "react";
 import { LoadingScreen } from "../../../components/ui/loadingScreen";
+import ViewAllBlogs from "@/app/_components/blog/ViewAllBlogs";
 
 export default function ViewPage() {
 

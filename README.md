@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Folio
+Folio is a simple, minimalistic blog keeping web app where you can write all of your daily thoughts, fanciest experience or whatever is in your mind. You can create, edit and delete blogs as per your liking and view all of your blogs at a glance in a clean looking UI.
 
-## Getting Started
 
-First, run the development server:
+## Why build Folio
+I have previousy build something similar to this but it sveltekit 5. Then, it was for a learning experience. And now too its to learn NextJs and React to build a more complex project.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Frontend Library:** [React](https://react.dev/)
+- **Backend & Database:** [Supabase](https://supabase.com/)
+- **Authentication:** [Supabase Auth](https://supabase.com/docs/guides/auth)
+- **Email Service:** SMTP via Gmail
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Features
+- **Create blogs:** Self explanatory
+- **Edit and delete blogs:** Self explanatory again :) 
+- **Minimalistic UI:** Focused entirely on typography, whitespace, and readability to keep your thoughts front and center.
+- **Dashboard Overview:** View all your written blogs at a glance in a structured, neat grid layout.
+- **Secure Authentication:** Email auth with Supabase
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Future Roadmap
+As I continue to scale this project and learn more, I plan to implement:
+- Search & Filter: A quick search bar to query past entries instantly.
+- Themes
+- Editing your blogs features
+- Rich Text Editing: Integrating a lightweight editor (like TipTap or Editor.js) instead of raw textareas.
+- Categories & Tags: Allowing users to organize their thoughts into custom folders or labels.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Contributing
+Contributions, issues, and feature requests are welcome! Since this is a personal portfolio and learning project, feel free to fork the repository, open issues, or submit pull requests to help improve the codebase.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
